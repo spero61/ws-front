@@ -12,7 +12,7 @@ interface VoteState {
 }
 
 const VOTE_OPTIONS = [0.5, 1, 2, 3];
-const SOCKET_URL = "http://localhost:3001";
+const SOCKET_URL = "167.179.77.239:3001";
 
 const App = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -75,18 +75,18 @@ const App = () => {
     return (
       <div className="card">
         <div className="card-header">
-          <h2>Join Voting Session</h2>
+          <h2>ニックネームを入力してください</h2>
         </div>
         <div className="card-content">
           <input
             type="text"
-            placeholder="Enter your name"
+            placeholder="ニックネーム"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="input-field"
           />
           <button onClick={joinVoting} className="button primary">
-            Join
+            参加する
           </button>
         </div>
       </div>
@@ -96,11 +96,11 @@ const App = () => {
   return (
     <div className="card">
       <div className="card-header">
-        <h2>Planning Poker</h2>
+        <h2>リファインメント</h2>
       </div>
       <div className="card-content">
         <div className="section">
-          <h3>Participants:</h3>
+          <h3>参加者:</h3>
           <div className="participants-list">
             {voteState.participants.map((participant) => (
               <span
@@ -118,7 +118,7 @@ const App = () => {
 
         {!voteState.hasVoted[username] && (
           <div className="section">
-            <h3>Cast your vote:</h3>
+            <h3>このタスクのポイントは？</h3>
             <div className="vote-options">
               {VOTE_OPTIONS.map((value) => (
                 <button
@@ -136,14 +136,14 @@ const App = () => {
         {voteState.votingComplete && !voteState.showResults && (
           <div className="section">
             <button onClick={showResults} className="button primary">
-              Show Results
+              結果を見る
             </button>
           </div>
         )}
 
         {voteState.showResults && (
           <div className="section">
-            <h3>Results:</h3>
+            <h3>結果発表</h3>
             <div className="results-list">
               {Object.entries(voteState.votes).map(([participant, vote]) => (
                 <div key={participant} className="result-item">
@@ -153,7 +153,7 @@ const App = () => {
               ))}
             </div>
             <button onClick={resetVoting} className="button primary">
-              Start New Vote
+              リセット
             </button>
           </div>
         )}
